@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FavoriteCard from "../components/favoriteCard/FavoriteCard";
 import { addFavorite, removeFavorite } from "../redux/slices/favoriteSlice";
+import { Helmet } from "react-helmet-async";
 
 export default function Favorites() {
   const favorite = useSelector((state) => state.favorite.favorite);
@@ -16,6 +17,9 @@ export default function Favorites() {
   }
   return (
     <div className="px-16 py-40">
+      <Helmet>
+        <title>Favorites</title>
+      </Helmet>
       {favorite.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 items-center">
           {favorite.map((item) => (
