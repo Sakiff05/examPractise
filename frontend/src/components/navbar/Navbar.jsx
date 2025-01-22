@@ -5,6 +5,8 @@ import { Link, NavLink } from "react-router";
 export default function Navbar() {
   const basket = useSelector((state) => state.basket.basket);
   const basketCount = basket.reduce((acc, sum) => acc + sum.count, 0);
+  const favorite = useSelector((state) => state.favorite.favorite);
+
   return (
     <nav className="flex justify-between items-center gap-y-3 flex-col sm:flex-row px-16 py-5 bg-white fixed z-50 w-full shadow-md">
       <div className="logo">
@@ -24,6 +26,9 @@ export default function Navbar() {
         </li>
         <li>
           <NavLink to="basket">Basket({basketCount})</NavLink>
+        </li>
+        <li>
+          <NavLink to="favorites">Favorite({favorite.length})</NavLink>
         </li>
       </ul>
     </nav>

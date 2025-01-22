@@ -1,6 +1,7 @@
 import Add from "../pages/Add";
 import Basket from "../pages/Basket";
 import Details from "../pages/Details";
+import Favorites from "../pages/Favorites";
 import Home from "../pages/Home";
 import NotFound from "../pages/NotFound";
 import Root from "../pages/Root";
@@ -29,6 +30,10 @@ const ROUTES = [
       {
         path: "add",
         element: <Add />,
+      },
+      {
+        path: "favorites",
+        element: <Favorites />,
       },
     ],
   },

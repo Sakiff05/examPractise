@@ -3,10 +3,11 @@ import axios from "axios";
 import Card from "../card/Card";
 import { useDispatch, useSelector } from "react-redux";
 import { addBasket } from "../../redux/slices/basketSlice";
+import { addFavorite, removeFavorite } from "../../redux/slices/favoriteSlice";
 export default function Shop() {
   const [data, setData] = useState([]);
   const [tempData, setTempData] = useState([]);
-  const basket = useSelector((state) => state.basket.basket);
+  const favorite = useSelector((state) => state.favorite.favorite);
   const dispatch = useDispatch();
 
   async function getData() {
@@ -22,6 +23,15 @@ export default function Shop() {
   function handleBasket(item, e) {
     e.stopPropagation();
     dispatch(addBasket(item));
+  }
+
+  function handleFavorite(item, e) {
+    e.stopPropagation();
+    if (favorite.find((card) => card._id == item._id)) {
+      dispatch(removeFavorite(item));
+    } else {
+      dispatch(addFavorite(item));
+    }
   }
 
   function handleSearch(e) {
@@ -71,7 +81,12 @@ export default function Shop() {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-5 items-center mt-10">
         {data.map((item) => (
-          <Card item={item} key={item._id} handleBasket={handleBasket} />
+          <Card
+            item={item}
+            key={item._id}
+            handleBasket={handleBasket}
+            handleFavorite={handleFavorite}
+          />
         ))}
       </div>
     </div>
